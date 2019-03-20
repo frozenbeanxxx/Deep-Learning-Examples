@@ -4,9 +4,21 @@
 
 # 从tensorflow.examples.tutorials.mnist引入模块。这是TensorFlow为了教学MNIST而提前编制的程序
 import os 
+import platform 
 from tensorflow.examples.tutorials.mnist import input_data
+
+sysstr = platform.system()
+if(sysstr =="Windows"):
+    print ("Call Windows tasks")
+    mnist_path = "D:/dataset/mnist"
+elif(sysstr == "Linux"):
+    print ("Call Linux tasks")
+    mnist_path = os.getenv("HOME") + "/dataset/mnist"
+else:
+    print ("Other System tasks")
+
+
 # 从MNIST_data/中读取MNIST数据。这条语句在数据不存在时，会自动执行下载
-mnist_path = os.getenv("HOME") + "/dataset/mnist"
 mnist = input_data.read_data_sets(mnist_path, one_hot=True)
 
 # 查看训练数据的大小
