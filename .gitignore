@@ -1,0 +1,8 @@
+events.out.tfevents.*
+*.h5
+*.pyd
+__pycache__/
+data/
+build/
+logs/
+backup/
