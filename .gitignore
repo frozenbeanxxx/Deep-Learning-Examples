@@ -6,3 +6,4 @@ data/
 build/
 logs/
 backup/
+.idea/

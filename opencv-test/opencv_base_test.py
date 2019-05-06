@@ -3,7 +3,7 @@ import random
 import numpy as np  
 
 def GaussionTest():
-    image_path = "/media/wx/0B8705400B870540/temp/20190301_samsung_SAMSUNG-SM-G890A_1440_2560_218 - 副本.JPEG"
+    image_path = "/media/wx/0B8705400B870540/dataset/test_image/timg.jpg"
     img = cv2.imread(image_path)
     rand_ksize = random.randint(1, 3)
     rand_ksize = rand_ksize if rand_ksize % 2 == 1 else rand_ksize - 1
@@ -54,8 +54,8 @@ def try_open():
         print('error')
 
 
-#GaussionTest()
+GaussionTest()
 #ImageSliceTest()
 #convert_color_channels()
 #save_image()
-try_open()
+#try_open()
