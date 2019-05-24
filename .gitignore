@@ -7,3 +7,5 @@ build/
 logs/
 backup/
 .idea/
+result/
+save_graph/

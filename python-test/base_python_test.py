@@ -5,10 +5,11 @@ import re
 import sys
 import tarfile
 import math
+import numpy as np 
 from functools import reduce
 from six.moves import urllib
 import functools
-import pysnooper
+#import pysnooper
 
 def hello_python():
     print("hello python")
@@ -234,7 +235,7 @@ def high_level_feature():
             # 遇到StopIteration就退出循环
             break
 
-@pysnooper.snoop()
+#@pysnooper.snoop()
 def higher_order_function_test():
     # 高阶函数测试
     a = abs(-10)
@@ -429,13 +430,49 @@ def return_test():
 from easydict import EasyDict
 
 
-@pysnooper.snoop()
+#@pysnooper.snoop()
 def essydict_test():
     d = EasyDict()
     d.a1 = 3
     d.a2 = 'ww'
     d.a3 = [1,2,3]
     print(d)
+
+def test01():
+    a = range(10)
+    b = max(a)
+    print(b)
+    print(math.e)
+    print(math.log(2,math.e))
+    a = str([1, 2])
+    print(a, type(a))
+    pro = [0.1, 0.1, 0.1, 0.7]
+    for _ in range(100):
+        a = np.random.choice(4, 1)#, p=pro)
+        #print(a)
+
+def zip_test():
+    a = [1,2,3]
+    b = [4,5,6]
+    c = [4,5,6,7,8]
+    zipped = zip(a,b)     # 打包为元组的列表
+    print(list(zipped))
+    print(zipped)
+    print(zip(a,c))              # 元素个数与最短的列表一致
+
+    #print(zip(*zipped))          # 与 zip 相反，*zipped 可理解为解压，返回二维矩阵式
+    
+    for i in zip(a):
+        print(i)
+    for i in zip(a,c):
+        print(i)
+    for i in zip(*zipped):
+        print(i)
+
+def print_test():
+    for i in range(100):
+        print(i, end='\t' if (i+1)%10!=0 else '\n')
+
 
 #download_test()
 #class_attribute_test()
@@ -448,10 +485,13 @@ def essydict_test():
 #nop()
 #func_test()
 #high_level_feature()
-higher_order_function_test()
+#higher_order_function_test()
 #return_fun_test()
 #decorator_test()
 #partial_function_test()
 #OOP_test()
 #return_test()
 #essydict_test()
+#test01()
+#zip_test()
+print_test()
