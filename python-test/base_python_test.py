@@ -473,6 +473,57 @@ def print_test():
     for i in range(100):
         print(i, end='\t' if (i+1)%10!=0 else '\n')
 
+def property_test():
+    class Student1(object):
+        pass
+    s = Student1()
+    s.score = 9999
+    print(s.score)
+
+    class Student2(object):
+        def get_score(self):
+            return self._score
+
+        def set_score(self, value):
+            if not isinstance(value, int):
+                raise ValueError('score must be an integer!')
+            if value < 0 or value > 100:
+                raise ValueError('score must between 0 ~ 100!')
+            self._score = value
+    s = Student2()
+    #s._score = 9998
+    s.set_score(91)
+    print(s.get_score())
+    #print(s._Student2__score)
+    s.score = 600
+    #s.score = 600
+    print(s.score)
+    print(s.get_score())
+    s._score = 69
+    print(s.score)
+    print(s.get_score())
+
+    class Student3(object):
+        @property
+        def score(self):
+            return self._score
+
+        @score.setter
+        def score(self, value):
+            if not isinstance(value, int):
+                raise ValueError('score must be an integer!')
+            if value < 0 or value > 100:
+                raise ValueError('score must between 0 ~ 100!')
+            self._score = value
+    s = Student3()
+    s.score = 60
+    #s.score = 600
+    print('qqq', s.score)
+    s._score = 69
+    print(s.score)
+
+
+
 
 #download_test()
 #class_attribute_test()
@@ -494,4 +545,5 @@ def print_test():
 #essydict_test()
 #test01()
 #zip_test()
-print_test()
+#print_test()
+property_test()
