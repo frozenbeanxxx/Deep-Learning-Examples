@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import tarfile
+import shutil
 import math
 import numpy as np 
 from functools import reduce
@@ -522,8 +523,29 @@ def property_test():
     s._score = 69
     print(s.score)
 
-
-
+def move_file():
+    def mymovefile(srcfile,dstfile):
+        if not os.path.isfile(srcfile):
+            print("%s not exist!"%(srcfile))
+        else:
+            fpath,fname=os.path.split(dstfile)    #分离文件名和路径
+            if not os.path.exists(fpath):
+                os.makedirs(fpath)                #创建路径
+            shutil.move(srcfile,dstfile)          #移动文件
+            print("move %s -> %s"%( srcfile,dstfile))
+    def mymovefile2(srcfile,dst_dir):
+        if not os.path.isfile(srcfile):
+            print("%s not exist!"%(srcfile))
+        else:
+            fpath,fname=os.path.split(srcfile)
+            if not os.path.exists(dst_dir):
+                os.makedirs(dst_dir)                #创建路径
+            dstfile = os.path.join(dst_dir, fname)
+            shutil.move(srcfile,dstfile)          #移动文件
+            print("move %s -> %s"%( srcfile,dstfile))
+    src_file = "D:\\temp/t2.py"
+    dst_dir = "D:\\temp\\aaaaa/"
+    mymovefile2(src_file, dst_dir)
 
 #download_test()
 #class_attribute_test()
@@ -546,4 +568,5 @@ def property_test():
 #test01()
 #zip_test()
 #print_test()
-property_test()
+#property_test()
+move_file()
