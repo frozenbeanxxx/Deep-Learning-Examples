@@ -5,6 +5,7 @@ import re
 import sys
 import tarfile
 import shutil
+import fire 
 import math
 import numpy as np 
 from functools import reduce
@@ -569,4 +570,7 @@ def move_file():
 #zip_test()
 #print_test()
 #property_test()
-move_file()
+#move_file()
+
+if __name__ == "__main__":
+    fire.Fire()
