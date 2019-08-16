@@ -73,6 +73,10 @@ def string_test():
     print(temp_str.strip())
     print(temp_str.lstrip())
     print(temp_str.rstrip())
+    s1 = 'sssss'
+    s2 = 'ddddd'
+    s3 = f"{s1}_{s2}"
+    print(s3)
 
 def date_type_test():
     # integer float string

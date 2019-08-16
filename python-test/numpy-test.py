@@ -1,4 +1,5 @@
 import numpy as np 
+import fire 
 import time 
 from matplotlib import pyplot as plt
 
@@ -9,6 +10,9 @@ def test1():
     print('random', a)
     a = np.random.randint(10, size=(10, 5))
     print('random', a)
+    a = np.full((2,3), 10)
+    a[0] = [1,2]
+    print(a)
 
 def test2():
     a = np.arange(0, 24)
@@ -21,6 +25,7 @@ def test2():
     print(a)
 
 def BaseTest1():
+    print('create numpy array')
     a = np.array([1,2,3,4,5])
     print(a)
     print(a.shape)
@@ -41,6 +46,8 @@ def BaseTest1():
     print(a[0][1])
     b = a[:,1]
     print(b)
+    c = np.full((5,2), 123)
+    print('\ninitial with a special number\n', c)
 
 def BaseTest2():
     a = np.array([[1.0, 2.0], [3.0, 4.0]]) 
@@ -600,4 +607,7 @@ def MatplotlibTest():
 #SortTest()
 #ByteswapTest()
 #SaveTest()
-MatplotlibTest()
+#MatplotlibTest()
+
+if __name__ == "__main__":
+    fire.Fire()

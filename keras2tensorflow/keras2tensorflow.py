@@ -72,6 +72,12 @@ toco --output_file=model.tflite \
 toco --output_file=resource_list_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=conv2d_input --output_arrays=dense_1/Softmax
 toco --output_file=clash_royale_ingame_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=conv2d_input --output_arrays=dense_1/Softmax
 toco --output_file=knives_out_ingame_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=conv2d_input --output_arrays=dense_1/Softmax
+toco --output_file=killnum_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=inputs --output_arrays=y_pred/truediv
+toco --output_file=killnum_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=inputs --output_arrays=y_pred/truediv
+toco --output_file=killnum_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=inputs --output_arrays=reshape/Reshape
+toco --output_file=killnum_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=inputs --output_arrays=query/BiasAdd,key/BiasAdd,value/BiasAdd
+
+tflite_convert --output_file=killnum_bgr_model.tflite --keras_model_file=model.h5 --input_arrays=inputs:0 --output_arrays=y_pred/truediv:0
 '''
 
 
