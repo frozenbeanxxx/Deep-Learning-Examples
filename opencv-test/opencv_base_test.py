@@ -2,6 +2,13 @@ import cv2
 import random 
 import numpy as np  
 
+def read_image():
+    image_path = "E:/dataset/hl_pokemon/PokemonElf/number/#001.png"
+    img = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+    shape = img.shape 
+    print(shape)
+    print(img)
+
 def GaussionTest():
     image_path = "/media/wx/0B8705400B870540/dataset/test_image/timg.jpg"
     img = cv2.imread(image_path)
@@ -53,8 +60,8 @@ def try_open():
         # AttributeError:
         print('error')
 
-
-GaussionTest()
+read_image()
+#GaussionTest()
 #ImageSliceTest()
 #convert_color_channels()
 #save_image()

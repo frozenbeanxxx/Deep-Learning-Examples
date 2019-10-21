@@ -11,7 +11,7 @@ def test1():
     a = np.random.randint(10, size=(10, 5))
     print('random', a)
     a = np.full((2,3), 10)
-    a[0] = [1,2]
+    a[0] = [1, 2, 3]
     print(a)
 
 def test2():
