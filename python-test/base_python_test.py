@@ -552,6 +552,18 @@ def move_file():
     dst_dir = "D:\\temp\\aaaaa/"
     mymovefile2(src_file, dst_dir)
 
+def with_test():
+    class C_A:
+        def __init__(self, msg):
+            self.msg = msg
+            print('init')
+        def __enter__(self):
+            print('enter')
+        def __exit__(self, exc_type, exc_value, exc_tb):
+            print(self.msg %(0.9), exc_type, exc_value, exc_tb)
+    with C_A('aaa %f'):
+        print('with C_A')
+
 #download_test()
 #class_attribute_test()
 #string_test()
