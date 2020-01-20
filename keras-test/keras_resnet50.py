@@ -5,9 +5,14 @@ from keras.applications.resnet50 import preprocess_input
 from keras.applications.resnet50 import decode_predictions
 from keras.applications.resnet50 import ResNet50
 
+import tensorflow as tf 
+config = tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True))
+sess = tf.Session(config=config)
+
 # load the model
-model = ResNet50(weights='D:\\Software\\weights\\keras/resnet50_weights_tf_dim_ordering_tf_kernels.h5')
+model = ResNet50(weights='/media/wx/diskE/weights/keras/resnet50_weights_tf_dim_ordering_tf_kernels.h5')
 #model = ResNet50(weights='D:\\Software\\weights\\keras/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5')
+model.summary()
 # load an image from file
 image = load_img('./data/dog.jpg', target_size=(224, 224))
 # convert the image pixels to a numpy array

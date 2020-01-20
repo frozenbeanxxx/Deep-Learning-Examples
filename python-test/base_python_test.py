@@ -564,6 +564,24 @@ def with_test():
     with C_A('aaa %f'):
         print('with C_A')
 
+def add_env():
+    current_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    sys.path.append(current_dir)
+    print(sys.path)
+    print('=================================')
+    print(os.environ)
+
+def t1():
+    while True:
+        s = input('please input something:  ')
+        print(s)
+        if s == 'q':
+            break 
+
+def t2():
+    assert 123456 % 32 == 0, 'Multiples of 32 required'
+    assert 123456 % 128 == 0, 'Multiples of 128 required'
+
 #download_test()
 #class_attribute_test()
 #string_test()

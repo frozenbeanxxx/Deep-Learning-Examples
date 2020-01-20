@@ -6,7 +6,7 @@ transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-cifar10_dataset_dir = 'D:\\dataset\\cifar10'
+cifar10_dataset_dir = '/media/wx/diskE/dataset/cifar10'
 trainset = torchvision.datasets.CIFAR10(root=cifar10_dataset_dir, train=True,
                                         download=True, transform=transform)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=4,
@@ -17,8 +17,7 @@ testset = torchvision.datasets.CIFAR10(root=cifar10_dataset_dir, train=False,
 testloader = torch.utils.data.DataLoader(testset, batch_size=4,
                                          shuffle=False, num_workers=2)
 
-classes = ('plane', 'car', 'bird', 'cat',
-           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 import matplotlib.pyplot as plt
 import numpy as np

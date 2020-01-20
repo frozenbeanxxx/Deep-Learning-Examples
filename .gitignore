@@ -4,8 +4,12 @@ events.out.tfevents.*
 __pycache__/
 data/
 build/
+model/
 logs/
 backup/
 .idea/
 result/
 save_graph/
+models_train_mnist/
+slim/
+*.db

@@ -4,8 +4,12 @@ from keras.applications.mobilenet_v2 import preprocess_input
 from keras.applications.mobilenet_v2 import decode_predictions
 from keras.applications.mobilenet_v2 import MobileNetV2
 
+import tensorflow as tf 
+config = tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True))
+sess = tf.Session(config=config)
+
 # load the model
-model = MobileNetV2(weights='E:\\weights\\keras/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.4_224.h5', alpha=1.4)
+model = MobileNetV2(weights='/media/wx/diskE/weights/keras/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.4_224.h5', alpha=1.4)
 model.summary()
 # load an image from file
 image = load_img('./data/bike.jpg', target_size=(224, 224))

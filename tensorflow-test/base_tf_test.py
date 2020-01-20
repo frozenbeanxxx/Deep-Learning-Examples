@@ -1,6 +1,7 @@
 import tensorflow as tf 
 import tensorflow.contrib.slim as slim
 import numpy as np
+import fire
 
 def CrossEntropyTest():
     logits = tf.constant([[1.0,2.0,3.0],\
@@ -348,6 +349,18 @@ def ReductionTest():# 归并运算
         print(sess.run(r8))
         print(sess.run(r9))
 
+def RunOpOrder():
+    a = tf.constant(3.0)
+    b = tf.constant(4.0)
+    c = tf.constant(5.0)
+    d = tf.add(a, b)
+    e = tf.multiply(c, d)
+    with tf.Session() as sess:
+        f = sess.run([e, d])
+        print(f)
+        f = sess.run([d, e])
+        print(f)
+    
 #TfConvTest()
 #GradientTest2()
 #MatMulTest()
@@ -355,5 +368,9 @@ def ReductionTest():# 归并运算
 #TfBaseAPI()
 #TensorTransformationTest()
 #MatOperator()
-ReductionTest()
+#ReductionTest()
+#RunOpOrder()
+
+if __name__ == "__main__":
+    fire.Fire()
 
