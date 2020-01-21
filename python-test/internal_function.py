@@ -134,6 +134,27 @@ def t1():
     #print(complex("1234", "333"))
     print(complex("1+2j"))
 
+    print("========== delattr ==========")
+    class D:
+        a = 1
+        b = 2
+        c = 3
+    d = D()
+    print(d.a)
+    print(d.b)
+    print(d.c)
+    delattr(D, 'c')
+    print(d.a)
+    print(d.b)
+    # print(d.c) # AttributeError: 'D' object has no attribute 'c'
+
+    print("========== dict ==========")
+    print("dict():", dict())
+    print("dict(a='a', b='b', t='t'):", dict(a='a', b='b', t='t'))
+    print("dict(zip(['one', 'two', 'three'], [1, 2, 3])):", dict(zip(['one', 'two', 'three'], [1, 2, 3])))
+    print("dict([('one', 1), ('two', 2), ('three', 3)]):", dict([('one', 1), ('two', 2), ('three', 3)]))
+    print("dict([(1, 'one'), (2, 'two')]):", dict([(1, 'one'), (2, 'two')]))
+
     print("========== bytearray ==========")
     print("========== bytearray ==========")
     print("========== bytearray ==========")
@@ -154,13 +175,7 @@ def t1():
     print("========== bytearray ==========")
     print("========== bytearray ==========")
     print("========== bytearray ==========")
-    print("========== bytearray ==========")
-    # print("========== dict ==========")
-    # print("dict():", dict())
-    # print("dict(a='a', b='b', t='t'):", dict(a='a', b='b', t='t'))
-    # print("dict(zip(['one', 'two', 'three'], [1, 2, 3])):", dict(zip(['one', 'two', 'three'], [1, 2, 3])))
-    # print("dict([('one', 1), ('two', 2), ('three', 3)]):", dict([('one', 1), ('two', 2), ('three', 3)]))
-    # print("dict([(1, 'one'), (2, 'two')]):", dict([(1, 'one'), (2, 'two')]))
+    
 
 
 
