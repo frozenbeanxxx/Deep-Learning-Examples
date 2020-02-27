@@ -1,15 +1,19 @@
 import functools
 import os
 import cv2
+import fire
 import h5py
+import json
 from natsort import natsorted
 import numpy as np
 import tensorflow as tf
 from tensorflow.contrib import slim
-from slim.nets.inception_v1 import inception_v1, inception_v1_base
+from nets.inception_v1 import inception_v1, inception_v1_base
+from nets.mobilenet.mobilenet_v3 import mobilenet, V3_SMALL, V3_SMALL_0_75
 
 def t1():
-    weight_path = '/media/wx/diskE/weights/tf/inception_v1.ckpt'
+    #weight_path = '/media/wx/diskE/weights/tf/inception_v1.ckpt'
+    weight_path = 'E:/weights/tf/inception_v1.ckpt'
     imgH, imgW = 224, 224
     x = tf.placeholder(tf.float32, [1, imgH, imgW, 3])
     with slim.arg_scope([slim.conv2d], biases_initializer=tf.constant_initializer(0)):
@@ -33,7 +37,8 @@ def t1():
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         saver.restore(sess, weight_path)
-        img = cv2.imread('/media/wx/diskE/temp/c1/201911251126.jpg')
+        #img = cv2.imread('/media/wx/diskE/temp/c1/201911251126.jpg')
+        img = cv2.imread('E:/dataset/coco/images/test2014/COCO_test2014_000000000016.jpg')
         img = img.astype(np.float32)
         img = cv2.resize(img, (imgH, imgW))
         img = img / 255.0
@@ -168,9 +173,106 @@ def t2():
             f.create_dataset(name + '/features', data=video_features[i])
         f.close()
             
+def t3():
+    #weight_path = 'E:/weights/tf/v3-small_224_1.0_float/ema/'
+    imgH, imgW = 224, 224
+    x = tf.placeholder(tf.float32, [1, imgH, imgW, 3])
+    #with slim.arg_scope():
+    #    y = mobilenet(x, num_classes=1001, conv_defs=V3_SMALL)
+    sess = tf.Session()
+    output = mobilenet(x, num_classes=1001, conv_defs=V3_SMALL)
+    output = output[1]['Predictions']
+    saver = tf.train.Saver()
+    #saver = tf.train.import_meta_graph('E:/weights/tf/v3-small_224_1.0_float/ema/model-388500.meta') # 加载模型结构
+    saver.restore(sess, 'E:/weights/tf/v3-small_224_1.0_float/ema/model-388500')
+    #saver = tf.train.import_meta_graph('E:/weights/tf/v3-small_224_1.0_float/pristine/model.ckpt-388500.meta') # 加载模型结构
+    #saver.restore(sess, 'E:/weights/tf/v3-small_224_1.0_float/pristine/model.ckpt-388500')
+
+    # names = []
+    # for variable_name in tf.global_variables():
+    #     name = variable_name.name
+    #     #print(name)
+    #     names.append(name)
+    # names.sort()
+    # for name in names:
+    #     print(name)
+
+    # img = cv2.imread('E:/dataset/imagenet/ILSVRC2012_img_val/ILSVRC2012_val_00000095.JPEG')
+    # img = img.astype(np.float32)
+    # img = cv2.resize(img, (imgH, imgW))
+    # img = img / 255.0
+    # img = np.expand_dims(img, axis=0)
+    # y = sess.run(output, feed_dict={x:img})
+    # y = np.squeeze(y)
+    # print(np.argmax(y), y[np.argmax(y)])
+    # print(y.shape)
+    
+    class_index_file = r"E:\dataset\imagenet\imagenet_class_index.json"
+    with open(class_index_file, 'r') as f:
+        class_dict = json.load(f)
+        #print(class_dict)
+
+    class_index_file2 = r"E:\dataset\imagenet\class_index_2.txt"
+    with open(class_index_file2, 'r') as f:
+        class_names = [s.strip('\n').split(' ')[0] for s in f.readlines()]
+        #print(class_number)
+
+    ground_truth_file = r"E:\dataset\imagenet\ILSVRC2012_devkit_t12\data\ILSVRC2012_validation_ground_truth.txt"
+    with open(ground_truth_file, 'r') as f:
+        ground_truth = [s.strip('\n') for s in f.readlines()]
+        #print(ground_truth)
+        print(len(ground_truth))
+        count = 0
+        for i, label in enumerate(ground_truth):
+            image_path = 'E:/dataset/imagenet/ILSVRC2012_img_val/ILSVRC2012_val_%08d.JPEG' % (i+1)
+
+            #print(image_path)
+            img = cv2.imread(image_path)
+            img = img[:,:,::-1]
+            img = img.astype(np.float32)
+            img = cv2.resize(img, (int(imgH*2), int(imgW*2)))
+            img = cv2.resize(img, (imgH, imgW))
+            img = img / 128.0 - 1
+            img = np.expand_dims(img, axis=0)
+            y = sess.run(output, feed_dict={x:img})
+            y = np.squeeze(y)
+            y = np.argmax(y)
+            #print(i+1, y-1, class_dict[str(y-1)][0], int(label), class_names[int(label)-1])
+
+            if class_dict[str(y-1)][0] == class_names[int(label)-1]:
+                count += 1
+            if i % 1000 == 0:
+                print(i, count/(i+1))
+        print(count)
+
+def t4():
+    imgH, imgW = 224, 224
+    x = tf.placeholder(tf.float32, [1, imgH, imgW, 3])
+    sess = tf.Session()
+    output = mobilenet(x, num_classes=1001, conv_defs=V3_SMALL_0_75, depth_multiplier=0.75)
+    output = output[1]['Predictions']
+    saver = tf.train.Saver()
+    for variable_name in tf.global_variables():
+        name = variable_name.name
+        print(variable_name)
+    #saver.restore(sess, 'E:/weights/tf/v3-small_224_1.0_float/ema/model-388500')
+    #f = h5py.File('v3-small_224_1.0_float.h5', 'w')
+    # saver.restore(sess, 'E:/weights/tf/v3-small_224_0.75_float/ema/model-497500')
+    # f = h5py.File('v3-small_224_0.75_float.h5', 'w')
+    # for variable_name in tf.global_variables():
+    #     name = variable_name.name
+    #     #print(variable_name)
+    #     print(name)
+    #     w = tf.get_default_graph().get_tensor_by_name(name)
+    #     ww = sess.run(w)
+    #     #print(w)
+    #     f.create_dataset(name, data=ww)
+    #     #break
+    # f.close()
+
 
 if __name__ == "__main__":
-    t2()
+    fire.Fire()
 
 
 
