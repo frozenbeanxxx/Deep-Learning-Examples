@@ -23,3 +23,8 @@ if __name__ == "__main__":
     
     print("help: python -h")
 
+    print("comments in python: #, ''' ... '''")
+    print('comments in python: #, """ ... """')
+
+
+

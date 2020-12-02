@@ -19,6 +19,7 @@ a, b, c, d = 20, 5.5, True, 4+3j
 print("a, b, c, d = 20, 5.5, True, 4+3j")
 print("type(): ", type(a), type(b), type(c), type(d))
 print("isinstance(a, int) : ", isinstance(a, int))
+print("0xFE32 = ", 0xFE32)
 
 del a
 print("del a")
@@ -82,6 +83,9 @@ print("chr(x): chr(1) = ", chr(113))
 print("ord(x): ord('q') = ", ord('q'))
 print("hex(x): hex(123456) = ", hex(123456))
 print("oct(x): oct(123456) = ", oct(123456))
+
+print("\n\n\n More *complex")
+
 
 
 
