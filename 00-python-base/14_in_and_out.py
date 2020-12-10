@@ -93,8 +93,35 @@ def use_pprint():
     pp.pprint(stuff)
     pp.pprint(a)
 
+def operate_file_2():
+    print("\noperate_file_2")
+    f = open("test.txt", "r")
+    a = f.tell()
+    print(a)
+    s = f.readline()
+    print(s)
+    a = f.tell()
+    print(a)
+    f.close()
+
+def operate_file_3():
+    print("\noperate_file_3")
+    fo = open("runoob.txt", "a+")
+    print ("文件名: ", fo.name)
+    str = "6:www.runoob.com\n"
+    fo.seek(0, 2)
+    line = fo.write( str )
+    fo.seek(0,0)
+    for index in range(6):
+        line = fo.readline().strip()
+        print ("文件行号 %d - %s" % (index, line))
+    fo.close()
+
+
 if __name__ == "__main__":
     print_info()
-    #input_something()
+    input_something()
     operate_file()
     use_pickle()
+    operate_file_2()
+    operate_file_3()
