@@ -82,6 +82,7 @@ def generator_1():
             print(next(f), end=' ')
         except StopIteration:
             print()
+            print("over generator_1")
             break
 
 

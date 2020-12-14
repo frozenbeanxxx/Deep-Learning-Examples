@@ -13,7 +13,7 @@ def looping_statement_2():
     var = 1
     while var == 1 :  # 表达式永远为 true
         num = int(input("输入一个数字  :"))
-        print ("你输入的数字是: ", num)
+        print ("你输入的数字是(666 quit): ", num)
         if (num == 666):
             break
     print ("Good bye!")
@@ -82,6 +82,11 @@ def pass_statement():
         print ('当前字母 :', letter)
     print ("Good bye!")
 
+def generate_list():
+    print("\n========== generate_list ==========")
+    print("[x for x in range(10)] : ", [x for x in range(10)])
+    print("[[x, x**2] for x in range(10)] : ", [[x, x**2] for x in range(10)])
+
 if __name__ == "__main__":
     looping_statement_1()
     looping_statement_2()
@@ -91,3 +96,4 @@ if __name__ == "__main__":
     control_flow_statement_1()
     control_flow_statement_2()
     pass_statement()
+    generate_list()
