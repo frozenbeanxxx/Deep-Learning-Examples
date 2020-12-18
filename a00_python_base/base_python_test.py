@@ -45,7 +45,7 @@ def download_test():
 def class_attribute_test():
     class ClassA(object):
         pass 
-        def func():
+        def func(self):
             print("class func")
     a = ClassA()
     a.b = 1.0

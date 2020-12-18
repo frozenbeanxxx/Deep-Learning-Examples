@@ -84,7 +84,7 @@ def t1():
         return a+b
     print(callable(add))
     class A:
-        def fun():
+        def fun(self):
             return 0
     print(callable(A))
     a = A()
