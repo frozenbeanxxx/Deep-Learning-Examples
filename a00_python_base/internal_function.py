@@ -1,5 +1,3 @@
-import fire 
-import numpy as np
 
 '''
 abs()	dict()	help()	min()	setattr()
@@ -31,7 +29,7 @@ def t1():
     print("all((0, 1, 2)):", all((0, 1, 2)))
     print("all([]):", all([]))
     print("all(()):", all(()))
-    a = np.array([0,1,2])
+    a = [0,1,2]
     print(all(a))
 
     print("========== any ==========")
@@ -175,10 +173,7 @@ def t1():
     print("========== bytearray ==========")
     print("========== bytearray ==========")
     print("========== bytearray ==========")
-    
-
-
 
 
 if __name__ == "__main__":
-    fire.Fire()
+    t1()

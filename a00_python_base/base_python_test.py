@@ -5,13 +5,12 @@ import re
 import sys
 import tarfile
 import shutil
-import fire 
 import math
-import numpy as np 
 from functools import reduce
-from six.moves import urllib
+#from six.moves import urllib
 import functools
 #import pysnooper
+#from easydict import EasyDict
 
 def hello_python():
     print("hello python")
@@ -433,7 +432,7 @@ def OOP_test():
 def return_test():
     print("qqqqqqqqqqqqqq")
 
-from easydict import EasyDict
+
 
 
 #@pysnooper.snoop()
@@ -607,4 +606,4 @@ def t2():
 #move_file()
 
 if __name__ == "__main__":
-    fire.Fire()
+    pass
