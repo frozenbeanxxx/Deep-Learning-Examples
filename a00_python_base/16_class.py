@@ -123,6 +123,19 @@ def operator_overload():
     v2 = Vector(5, 2)
     print(v1 + v2)
 
+def test_class_member():
+    print("\ntest_class_member")
+    class MemberCounter:
+        members = 0
+        def init(self):
+            MemberCounter.members += 1
+    m1 = MemberCounter()
+    m1.init()
+    print("MemberCounter.members = ", m1.members)
+    m2 = MemberCounter()
+    m2.init()
+    print("MemberCounter.members = ", m2.members)
+
 if __name__ == "__main__":
     simple_class()
     class_with_init()
@@ -132,3 +145,4 @@ if __name__ == "__main__":
     multi_inherit()
     overwrite_method()
     operator_overload()
+    test_class_member()
