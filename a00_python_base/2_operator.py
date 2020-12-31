@@ -10,7 +10,10 @@ print("\nbit operator")
 print("2 << 4 = ", 2 << 4)
 a = 1
 print("(a := 2) == 3 is", (a:=2) == 3, ", a = ", a, ", := is 海象运算符")
-print("(a := 3) == 3 is", (a:=3) == 3, ", a = ", a, ", := is 海象运算符")
+print("(a := 4) == 4 is", (a:=4) == 4, ", a = ", a, ", := is 海象运算符")
+l = list(range(16))
+if (n := len(l)) > 10:
+    print('length of l is ', n)
 
 print("\n5. member operater")
 l1 = [1, 2]

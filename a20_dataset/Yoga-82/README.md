@@ -1,0 +1,1 @@
+Yoga-82是一个瑜伽姿势分类数据集，官网https://sites.google.com/view/yoga-82/home，不能直接下载图片，提交申请后官方会回复邮件，内含所有图片的下载地址
