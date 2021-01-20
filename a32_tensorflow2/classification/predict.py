@@ -1,6 +1,7 @@
 import sys
 import os
 import cv2
+from tqdm import tqdm
 import time 
 import random  
 import numpy as np
@@ -12,8 +13,8 @@ from config import *
 from model import create_model
 
 import tensorflow as tf 
-config = tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True))
-sess = tf.Session(config=config)
+gpus= tf.config.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(gpus[0], True)
 
 def predict_one_with_h5(file):
     x = load_img(file, target_size=(image_height, image_weight))
@@ -92,6 +93,34 @@ def predict(predict_one):
     print("accuracy: ", (tp + tn)/ (tp + tn + fp + fn))
     f_measure = (2 * recall * precision) / (recall + precision)
     print("F-measure: ", f_measure)
+
+def predict2():
+    tp = 0
+    count = 0
+
+    cat_dirs = os.listdir(test_data_dir)
+    for i, cat_dir in enumerate(cat_dirs):
+        print('index: ', i, 'cat: ', cat_dir)
+        image_dir = os.path.join(test_data_dir, cat_dir)
+        files = os.listdir(image_dir)
+        image_nums = len(files)
+        for file in tqdm(files):
+            image_path = os.path.join(image_dir, file)
+            img = cv2.imread(image_path)
+            try:
+                img = cv2.resize(img, (image_weight, image_height))
+                count += 1
+            except:
+                print(image_path)
+                continue
+            img = img / 255.0
+            img = np.expand_dims(img, axis=0)
+            res = model(img)
+            res_cls = np.argmax(res)
+            if res_cls == i:
+                tp += 1
+        print('acc:', tp / count)
+
 
 def cut_black_edge(image):
     shape = image.shape
@@ -270,7 +299,8 @@ if __name__ == "__main__":
         else:
             model = load_model(os.path.join(model_dir, model_name))
             model.load_weights(os.path.join(model_dir, weight_name))
-            predict(predict_one=predict_one_with_h5)
+            #predict(predict_one=predict_one_with_h5)
+            predict2()
     elif argc > 2 and (argvs[1] == "--image"):
         predict_one_image(file=argvs[3], mode=argvs[2])
     elif argc > 2 and (argvs[1] == "--video"):

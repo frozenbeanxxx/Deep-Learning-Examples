@@ -6,10 +6,9 @@ decay=1e-8
 epochs = 200
 
 
-train_data_dir = '/media/wx/diskE/prj_data/video/cod_box'
-val_data_dir = '/media/wx/diskE/prj_data/video/cod_box'
-test_data_dir = '/media/wx/diskE/prj_data/video/cod_box'
-neg_dir = 'D:\\dataset\\hv_royale\\InGame20190719\\neg'
+train_data_dir = '/home/weixing/data/other/CatAndDog/PetImages'
+val_data_dir = '/home/weixing/data/other/CatAndDog/PetImages'
+test_data_dir = '/home/weixing/data/other/CatAndDog/PetImages'
 log_dir = './log/'
 model_dir = './models'
 model_name = 'model.h5'
