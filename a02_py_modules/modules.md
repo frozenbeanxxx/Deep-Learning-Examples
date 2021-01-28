@@ -12,7 +12,7 @@
 - tqdm, 
 - pyyaml, 
 - portalocker, 
-- yacs, 
+- yacs：定义管理系统配置，使用yaml脚本
 - tabulate, 
 - iopath, 
 - thop: 统计pytorch模型的计算量与参数量
@@ -20,6 +20,10 @@
 - gdown：从google下载大文件，google down
 - tb-nightly：TensorBoard is a suite of web applications for inspecting and understanding your TensorFlow runs and graphs.TensorBoard是一套web应用程序，用于检查和理解您的TensorFlow运行和图表。
 - gast：表示python2和python3的抽象语法树（ast）的泛型ast。gast在各种python版本的ast之间提供了一个兼容层， 由ast.parse从标准ast模块生成。
+- termcolor：termcolor是一个python包，可以改变控制台输出的颜色，支持各种terminal（WINDOWS的cmd.exe除外）
+- faiss：Faiss is a library for efficient similarity search and clustering of dense vectors，pip install faiss-cpu
+- apex：git+https://github.com/NVIDIA/apex.git@02a33875970e1b555754dfc4ab85d05595d23764#egg=apex
+- ipdb：IPython-enabled pdb
 
 ```
 apex
