@@ -1,7 +1,45 @@
-import torch 
+import os
+import torch
 import torch.nn as nn
 import torchvision
 import torchvision.transforms as transforms
+
+
+class ConvNet(nn.Module):
+    def __init__(self, num_classes=10):
+        super(ConvNet, self).__init__()
+        self.layer1 = nn.Sequential(
+            nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(16),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.layer2 = nn.Sequential(
+            nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(32),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.layer3 = nn.Sequential(
+            nn.Conv2d(32, 64, kernel_size=3, stride=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+        )
+        self.layer4 = nn.Sequential(
+            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+        )
+        self.fc = nn.Linear(3*3*64, num_classes)
+
+    def forward(self, x):
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+        x = x.reshape(x.size(0), -1)
+        x = self.fc(x)
+        return x
 
 def convolutional_nerual_network():
     # Device configuration
@@ -14,7 +52,7 @@ def convolutional_nerual_network():
     batch_size = 100
     learning_rate = 0.001
 
-    mnist_path = r'E:\dataset\mnist'
+    mnist_path = '/media/weixing/diskD/dataset/pytorch/mnist'
     # MNIST dataset
     train_dataset = torchvision.datasets.MNIST(root=mnist_path,
                                             train=True, 
@@ -34,28 +72,7 @@ def convolutional_nerual_network():
                                             batch_size=batch_size, 
                                             shuffle=False)
 
-    class ConvNet(nn.Module):
-        def __init__(self, num_classes=10):
-            super(ConvNet, self).__init__()
-            self.layer1 = nn.Sequential(
-                nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2),
-                nn.BatchNorm2d(16),
-                nn.ReLU(),
-                nn.MaxPool2d(kernel_size=2, stride=2)
-            )
-            self.layer2 = nn.Sequential(
-                nn.Conv2d(16, 32, kernel_size=5, stride=1, padding=2),
-                nn.BatchNorm2d(32),
-                nn.ReLU(),
-                nn.MaxPool2d(kernel_size=2, stride=2)
-            )
-            self.fc = nn.Linear(7*7*32, num_classes)
-        def forward(self, x):
-            x = self.layer1(x)
-            x = self.layer2(x)
-            x = x.reshape(x.size(0), -1)
-            x = self.fc(x)
-            return x 
+
     
     model = ConvNet(num_classes).to(device)
     print(model)
@@ -91,7 +108,9 @@ def convolutional_nerual_network():
         print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))
 
     # Save the model checkpoint
-    model_path = 'model/202001121705_model.ckpt'
+    model_dir = 'model'
+    os.makedirs(model_dir, exist_ok=True)
+    model_path = model_dir + '/convolutional_nerual_network_model.pth'
     torch.save(model.state_dict(), model_path)
 
 

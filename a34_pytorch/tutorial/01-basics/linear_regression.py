@@ -1,4 +1,5 @@
-import torch 
+import os
+import torch
 import torch.nn as nn 
 import numpy as np 
 import matplotlib.pyplot as plt 
@@ -20,6 +21,7 @@ def linear_regression():
     model = nn.Linear(input_size, output_size)
     criterion = nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=lr)
+    #optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
     # aaa = torch.from_numpy(x_train)
     # bbb = aaa.numpy()
@@ -42,7 +44,9 @@ def linear_regression():
     plt.legend()
     plt.show()
 
-    model_weight = 'model/model_2.ckpt'
+    model_dir = 'model'
+    os.makedirs(model_dir, exist_ok=True)
+    model_weight = model_dir + '/linear_regression_model.pth'
     torch.save(model.state_dict(), model_weight)
 
 if __name__ == "__main__":

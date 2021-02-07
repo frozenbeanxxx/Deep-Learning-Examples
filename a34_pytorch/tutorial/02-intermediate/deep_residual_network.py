@@ -18,7 +18,7 @@ def deep_residual_network():
         transforms.ToTensor()
     ])
 
-    mnist_path = r'E:/dataset/cifar10'
+    mnist_path = '/media/weixing/diskD/dataset/pytorch/cifar10'
     # CIFAR-10 dataset
     train_dataset = torchvision.datasets.CIFAR10(root=mnist_path,
                                                 train=True, 

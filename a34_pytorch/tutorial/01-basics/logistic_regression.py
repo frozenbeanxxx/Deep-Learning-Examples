@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torchvision
@@ -10,9 +11,11 @@ def lgistic_regression():
     batch_size = 100
     learning_rate = 0.001
 
-    model_weight = 'model/model_3.ckpt'
-    mnist_path = 'E:/dataset/mnist'
-    train_dataset = torchvision.datasets.MNIST(root=mnist_path, train=True, transform=transforms.ToTensor())#, download=True)
+    model_dir = 'model'
+    os.makedirs(model_dir, exist_ok=True)
+    model_weight = model_dir + '/logistic_regression_model.pth'
+    mnist_path = '/media/weixing/diskD/dataset/pytorch/mnist'
+    train_dataset = torchvision.datasets.MNIST(root=mnist_path, train=True, transform=transforms.ToTensor(), download=True)
     test_dataset = torchvision.datasets.MNIST(root=mnist_path, train=True, transform=transforms.ToTensor())
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
