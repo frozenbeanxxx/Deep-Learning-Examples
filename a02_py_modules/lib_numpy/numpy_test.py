@@ -82,9 +82,10 @@ def BaseTest2():
     student = np.dtype([('name','S20'), ('age', 'i1'), ('marks', 'f4')]) 
     print(student)
     a = np.array([('abc', 21, 50),('xyz', 18, 75)], dtype = student) 
-    print(a)
-    print(a['name'])
-    print(a['age'])
+    print('a:', a)
+    print("a['name']:", a['name'])
+    print("a['age']:", a['age'])
+    print("a['marks']:", a['marks'])
     print('%i, %i' % (True, 10))
 
     a = np.arange(24)  
@@ -95,11 +96,11 @@ def BaseTest2():
 
     # 数组的 dtype 为 int8（一个字节）  
     x = np.array([1,2,3,4,5], dtype = np.int8)  
-    print (x.itemsize)
+    print ('x.itemsize:', x.itemsize)
     
     # 数组的 dtype 现在为 float64（八个字节） 
     y = np.array([1,2,3,4,5], dtype = np.float64)  
-    print (y.itemsize)
+    print ('y.itemsize:', y.itemsize)
 
     x = np.array([1,2,3,4,5])  
     print (x.flags) 
@@ -232,7 +233,7 @@ def BaseTest3():
     #print(a + c)
 
 def ShapeOperator():
-    a = np.floor(10*np.random.random((3,4)))
+    a = np.floor(10 * np.random.random((3,4)))
     print(a)
     print(a.shape)
     print(a.ravel())
@@ -240,10 +241,10 @@ def ShapeOperator():
     print(a.T)
     print(a.T.shape)
 
-    a = np.floor(10*np.random.random((2,2)))
-    print(a)
-    b = np.floor(10*np.random.random((2,2)))
-    print(b)
+    a = np.floor(10 * np.random.random((2,2)))
+    print('a', a)
+    b = np.floor(10 * np.random.random((2,2)))
+    print('b', b)
     c = np.vstack((a,b))
     print(c)
     c = np.hstack((a,b))
@@ -266,7 +267,7 @@ def ShapeOperator():
     print(c)
 
     # hspilit沿横轴分割，vsplit沿纵轴分割，array_split沿指定轴分割
-    a = np.floor(10*np.random.random((2,12)))
+    a = np.floor(10 * np.random.random((2,12)))
     print(a)
     c = np.hsplit(a,3)
     print(c)
@@ -287,8 +288,8 @@ def CopyTest():
     f(a)
 
     c = a.view()
-    print(c is a)
-    print(c.base is a)
+    print('c is a', c is a)
+    print('c.base is a', c.base is a)
     print(c.flags.owndata)
     c.shape = 2,6
     print(c.shape)
