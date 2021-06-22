@@ -6,15 +6,26 @@ from tqdm import tqdm
 
 # =======================================读取mpii标注=======================================
 
-mpiipath = "./annot/train.json"  # mpii train的地址
-writepath = "./annotations/person_keypoints_mpii2coco_train.json"  # mpii转换成coco的地址(train)
-p = 100000  # train
+root_dir = '/media/weixing/diskD/dataset/mpii'
+mpii_imgpath = "images"  # mpii图片的地址
 
-# mpiipath = "./annot/valid.json"  # mpii valid的地址
-# writepath = "./annotations/person_keypoints_mpii2coco_val.json"  # mpii转换成coco的地址(val)
-# p = 200000  # val
 
-mpii_imgpath = "./mpii"  # mpii图片的地址
+#mpiipath = "annot/train.json"  # mpii train的地址
+#writepath = "annotations/person_keypoints_mpii2coco_train.json"  # mpii转换成coco的地址(train)
+#p = 100000  # train
+
+mpiipath = "annot/valid.json"  # mpii valid的地址
+writepath = "annotations/person_keypoints_mpii2coco_val.json"  # mpii转换成coco的地址(val)
+p = 200000  # val
+
+mpiipath = os.path.join(root_dir, mpiipath)
+writepath = os.path.join(root_dir, writepath)
+mpii_imgpath = os.path.join(root_dir, mpii_imgpath)
+
+
+
+
+
 
 with open(mpiipath, 'r', encoding='utf-8')as f:
     mpii = json.load(f)
@@ -30,6 +41,10 @@ coco = { # 定义coco标注的总字典，包含三个子字典
     "categories": [{"name": "person", "id": 1}],
     "images": []
 }
+keypoints = []
+skeleton = [[0,1],[1,2],[2,6],[6,3],[3,4],[4,5],[6,7],[7,8],[8,9],[8,12],[12,11],[11,10],[8,13],[13,14], [14, 15]]
+coco["categories"][0]['keypoints'] = keypoints
+coco["categories"][0]['skeleton'] = skeleton
 
 # start = 1000
 # end = 2000
@@ -60,7 +75,7 @@ for i in tqdm(range(len(mpii))):
         "width": 0,
         "id": 0
     }
-	
+
 #           ===========================id&image_id的转换============================
 
     ids = ''.join(a for a in mpii_inf['image'] if a in "0123456789")
@@ -69,8 +84,8 @@ for i in tqdm(range(len(mpii))):
     annot_block['image_id'] = ids
     images_block['file_name'] = mpii_inf['image']
     images_block['id'] = ids
-	
-	annot_block['num_keypoints'] = sum(mpii_inf['joints_vis'])
+
+    annot_block['num_keypoints'] = sum(mpii_inf['joints_vis'])
 
 #           ===========================keypoints&bbox的转换============================
 
