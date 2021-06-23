@@ -1,7 +1,13 @@
 events.out.tfevents.*
+# pycharm cache dir
+.idea/
+
+# run python cache dir
+__pycache__/
+
 *.h5
 *.pyd
-__pycache__/
+
 data/
 build/
 model/
@@ -9,9 +15,11 @@ models/
 logs/
 log/
 backup/
-.idea/
+
 result/
 save_graph/
 models_train_mnist/
 slim/
 *.db
+*.so
+
