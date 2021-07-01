@@ -1,8 +1,0 @@
-numpy
-fire
-pcl
-h5py
-natsort
-Pillow # Pillow: a replacement for PIL
-termcolor
-six

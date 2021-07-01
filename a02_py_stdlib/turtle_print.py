@@ -1,3 +1,7 @@
+'''
+turtle库是python自带的简单绘图库，直接import就可以使用
+'''
+
 from turtle import *
 
 forward(100)
