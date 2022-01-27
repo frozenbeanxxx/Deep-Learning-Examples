@@ -22,10 +22,12 @@ fire
 ## Typing
 
 
-
+## misc
 pcl
 h5py
 natsort
 Pillow # Pillow: a replacement for PIL
 termcolor
 six
+
+- wandb：类似tensorboard，在线模型训练可视化工具
